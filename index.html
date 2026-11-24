@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Control Ganadero Pro</title>
+<style>
+:root{font:100% system-ui,sans-serif;color:#172e25;background:#edf1eb;--verde:#174c38;--borde:#cbd8ce}
+*{box-sizing:border-box}
+body{margin:0}
+[hidden]{display:none!important}
+header{background:#12382b;color:white;padding:1rem max(1rem,calc((100vw - 72rem)/2));display:flex;align-items:center;justify-content:space-between;gap:1rem}
+header strong{font-size:1.15rem}
+main{max-width:74rem;margin:auto;padding:clamp(1rem,3vw,2rem)}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(1.7rem,4vw,2.55rem);margin-bottom:.5rem}
+h2{font-size:1.3rem}
+.panel,article,dialog{background:white;border:1px solid var(--borde);border-radius:1rem;padding:clamp(1rem,3vw,1.6rem)}
+.login{max-width:29rem;margin:clamp(1rem,7vh,5rem) auto}
+.layout{display:grid;grid-template-columns:minmax(18rem,1fr) minmax(0,1.55fr);gap:1rem;align-items:start}
+form,fieldset{display:grid;gap:.85rem}
+fieldset{padding:0;border:0;margin:0;min-width:0}
+fieldset:disabled{opacity:.65}
+label{display:grid;gap:.3rem;font-weight:600;font-size:.95rem}
+input,select,textarea,button{font:inherit}
+input,select,textarea{width:100%;min-width:0;border:1px solid #93a99a;border-radius:.5rem;padding:.63rem;color:inherit;background:white}
+textarea{resize:vertical}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.full{grid-column:1/-1}
+button{cursor:pointer;background:var(--verde);color:white;border:1px solid transparent;border-radius:.55rem;padding:.62rem .9rem;font-weight:650}
+button:disabled{opacity:.55;cursor:default}
+.secondary{background:white;color:var(--verde);border-color:#93a99a}
+:focus-visible{outline:3px solid #ac5419;outline-offset:3px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:.7rem;flex-wrap:wrap;margin-bottom:.7rem}
+.toolbar h2{margin:0}
+.cards{display:grid;gap:.7rem}
+.cards article{padding:1rem;overflow-wrap:anywhere}
+.cards h3{margin:0 0 .4rem}
+.meta{color:#486254;font-size:.9rem}
+.status{margin:0;overflow-wrap:anywhere}
+.status:empty{display:none}
+.error{color:#8e271e}
+nav{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.75rem}
+dialog{width:min(92vw,50rem);max-height:90vh;color:inherit}
+dialog::backdrop{background:#0d231ecc}
+dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margin:auto}
+@media(max-width:760px){.layout{grid-template-columns:1fr}}
+@media(max-width:370px){.fields{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <strong>Control Ganadero Pro</strong>
+  <button hidden id="salir" class="secondary" type="button">Cerrar sesión</button>
+</header>
+
+<main>
+  <p id="aviso" class="status error" role="alert"></p>
+
+  <section id="acceso" class="panel login">
+    <h1>Iniciar sesión</h1>
+    <p>Ingresa con tu cuenta de socio.</p>
+    <form id="login">
+      <fieldset id="login-campos" disabled>
+        <label>Correo electrónico
+          <input name="correo" type="email" autocomplete="username" required>
+        </label>
+        <label>Contraseña
+          <input name="clave" type="password" autocomplete="current-password" required>
+        </label>
+        <button>Entrar</button>
+      </fieldset>
+      <p id="login-estado" class="status error" role="alert"></p>
+    </form>
+  </section>
+
+  <section id="app" hidden>
+    <h1>Mi ganado</h1>
+    <p id="cuenta" class="meta"></p>
+    <div class="layout">
+      <section class="panel">
+        <h2>Registrar animal</h2>
+        <form id="alta">
+          <fieldset id="alta-campos" class="fields" disabled>
+            <label>Arete<input name="arete" maxlength="80" required></label>
+            <label>Nombre<input name="nombre" maxlength="120"></label>
+            <label>Raza<input name="raza" maxlength="100"></label>
+            <label>Color<input name="color" maxlength="100"></label>
+            <label>Sexo
+              <select name="sexo">
+                <option value="">Seleccionar</option>
+                <option>Hembra</option>
+                <option>Macho</option>
+              </select>
+            </label>
+            <label>Fecha de nacimiento<input name="fecha_nacimiento" type="date"></label>
+            <label class="full">Propietario<input name="propietario" maxlength="160"></label>
+            <label class="full">Foto (JPG, PNG o WebP, hasta 5 MB)
+              <input name="foto" type="file" accept="image/jpeg,image/png,image/webp">
+            </label>
+            <label class="full">Observaciones
+              <textarea name="observaciones" rows="3" maxlength="2000"></textarea>
+            </label>
+            <button class="full">Guardar animal</button>
+          </fieldset>
+          <p id="alta-estado" class="status" role="status"></p>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="titulo-lista">
+        <div class="toolbar">
+          <h2 id="titulo-lista">Animales registrados</h2>
+          <button id="recargar" class="secondary" type="button">Actualizar</button>
+        </div>
+        <p id="lista-estado" class="status meta" role="status"></p>
+        <div id="lista" class="cards"></div>
+        <nav aria-label="Páginas del listado">
+          <button id="anterior" class="secondary" type="button" disabled>Anterior</button>
+          <span id="pagina" class="meta"></span>
+          <button id="siguiente" class="secondary" type="button" disabled>Siguiente</button>
+        </nav>
+      </section>
+    </div>
+  </section>
+</main>
+
+<dialog id="visor" aria-labelledby="foto-titulo">
+  <div class="toolbar">
+    <h2 id="foto-titulo">Foto del animal</h2>
+    <form method="dialog"><button class="secondary">Cerrar foto</button></form>
+  </div>
+  <p id="foto-estado" class="status" role="status"></p>
+  <img id="imagen" alt="Foto del animal" hidden>
+</dialog>
+
+<noscript>Activa JavaScript para usar Control Ganadero Pro.</noscript>
+
+<script type="module">
+const SUPABASE_URL = 'PENDIENTE_URL_CONFIRMADA';
+const SUPABASE_KEY = 'sb_publishable_KZzn38tyzYISqu88pYXOlw_jZ7-TvgO';
+const BUCKET = 'fotos-ganado';
+const PAGE_SIZE = 20;
+const PHOTO_TYPES = {'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};
+const $ = id => document.getElementById(id);
+const dateFormat = new Intl.DateTimeFormat('es-MX', {dateStyle:'medium', timeZone:'UTC'});
+let db, user, saving = false, page = 0, listRequest = 0, photoRequest = 0;
+
+function message(id, value, error = false) {
+  $(id).textContent = value;
+  $(id).classList.toggle('error', error);
+}
+
+function showSession(session) {
+  const next = session?.user ?? null;
+  if (next?.id === user?.id) return;
+  user = next;
+  listRequest++;
+  closePhoto();
+  $('lista').replaceChildren();
+  $('alta').reset();
+  saving = false;
+  $('alta-campos').disabled = true;
+  message('alta-estado', '');
+  message('aviso', '');
+  $('app').hidden = !user;
+  $('acceso').hidden = Boolean(user);
+  $('salir').hidden = !user;
+  $('cuenta').textContent = user?.email ?? '';
+  if (user) void loadAnimals(0);
+}
+
+function localDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? value : dateFormat.format(date);
+}
+
+function animalCard(animal) {
+  const card = document.createElement('article');
+  const title = document.createElement('h3');
+  title.textContent = animal.nombre ? animal.nombre + ' · ' + animal.arete : 'Arete ' + animal.arete;
+  card.append(title);
+
+  const details = [
+    ['Raza', animal.raza],
+    ['Color', animal.color],
+    ['Sexo', animal.sexo],
+    ['Nacimiento', animal.fecha_nacimiento && localDate(animal.fecha_nacimiento)],
+    ['Propietario', animal.propietario],
+    ['Registrado', animal.fecha_registro && localDate(animal.fecha_registro)]
+  ].filter(([, value]) => value);
+
+  if (details.length) {
+    const meta = document.createElement('p');
+    meta.className = 'meta';
+    meta.textContent = details.map(([label, value]) => label + ': ' + value).join(' · ');
+    card.append(meta);
+  }
+
+  if (animal.observaciones) {
+    const notes = document.createElement('p');
+    notes.textContent = animal.observaciones;
+    card.append(notes);
+  }
+
+  if (animal.foto_url) {
+    const button = document.createElement('button');
+    button.className = 'secondary';
+    button.textContent = 'Ver foto';
+    button.addEventListener('click', () => openPhoto(animal));
+    card.append(button);
+  }
+
+  return card;
+}
+
+async function loadAnimals(target) {
+  if (!user) return;
+  const request = ++listRequest;
+  const uid = user.id;
+  $('anterior').disabled = $('siguiente').disabled = true;
+  message('lista-estado', 'Cargando animales…');
+
+  try {
+    const membership = await db.rpc('cg_es_socio');
+    if (membership.error) throw membership.error;
+    if (request !== listRequest) return;
+
+    $('alta-campos').disabled = !membership.data || saving;
+    if (!membership.data) {
+      $('lista').replaceChildren();
+      $('pagina').textContent = '';
+      closePhoto();
+      message('lista-estado', 'Tu cuenta todavía no tiene acceso. Pide al administrador que la habilite.', true);
+      return;
+    }
+
+    const {data, error} = await db.from('animales')
+      .select('id,arete,nombre,raza,color,sexo,fecha_nacimiento,propietario,foto_url,observaciones,fecha_registro')
+      .eq('creado_por', uid)
+      .order('fecha_registro', {ascending:false})
+      .order('id', {ascending:false})
+      .range(target * PAGE_SIZE, (target + 1) * PAGE_SIZE);
+
+    if (error) throw error;
+    if (request !== listRequest) return;
+    if (!data.length && target > 0) return loadAnimals(target - 1);
+
+    page = target;
+    $('lista').replaceChildren(...data.slice(0, PAGE_SIZE).map(animalCard));
+    $('pagina').textContent = 'Página ' + (page + 1);
+    $('anterior').disabled = page === 0;
+    $('siguiente').disabled = data.length <= PAGE_SIZE;
+    message('lista-estado', data.length ? '' : 'Todavía no tienes animales registrados.');
+  } catch {
+    if (request === listRequest) {
+      message('lista-estado', 'No se pudo cargar el listado. Pulsa Actualizar para reintentar.', true);
+    }
+  }
+}
+
+function closePhoto() {
+  photoRequest++;
+  if ($('visor').open) $('visor').close();
+  $('imagen').hidden = true;
+  $('imagen').removeAttribute('src');
+}
+
+$('visor').addEventListener('close', () => {
+  if (!$('visor').open) closePhoto();
+});
+
+async function openPhoto(animal) {
+  if (!user) return;
+  const request = ++photoRequest;
+  const img = $('imagen');
+  img.hidden = true;
+  img.removeAttribute('src');
+  $('foto-titulo').textContent = 'Foto · ' + animal.arete;
+  message('foto-estado', 'Cargando foto…');
+  $('visor').showModal();
+
+  try {
+    if (!animal.foto_url.startsWith(user.id + '/')) throw new Error('Ruta inválida');
+    const {data, error} = await db.storage.from(BUCKET).createSignedUrl(animal.foto_url, 120);
+    if (error) throw error;
+    if (request !== photoRequest || !$('visor').open) return;
+
+    img.onload = () => {
+      if (request !== photoRequest) return;
+      img.hidden = false;
+      message('foto-estado', '');
+    };
+    img.onerror = () => {
+      if (request === photoRequest) {
+        message('foto-estado', 'No se pudo mostrar la foto. Cierra y vuelve a abrir.', true);
+      }
+    };
+    img.src = data.signedUrl;
+  } catch {
+    if (request === photoRequest && $('visor').open) {
+      message('foto-estado', 'No se pudo abrir la foto.', true);
+    }
+  }
+}
+
+$('login').addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!db) return;
+  const form = event.currentTarget;
+  const fields = new FormData(form);
+  $('login-campos').disabled = true;
+  message('login-estado', '');
+
+  try {
+    const {error} = await db.auth.signInWithPassword({
+      email: fields.get('correo').trim(),
+      password: fields.get('clave')
+    });
+    if (error) throw error;
+    form.reset();
+  } catch {
+    message('login-estado', 'No se pudo iniciar sesión. Revisa tus datos y la conexión.', true);
+  } finally {
+    $('login-campos').disabled = false;
+  }
+});
+
+$('salir').addEventListener('click', async () => {
+  $('salir').disabled = true;
+  try {
+    const {error} = await db.auth.signOut({scope:'local'});
+    if (error) throw error;
+  } catch {
+    message('aviso', 'No se pudo cerrar la sesión. Vuelve a intentarlo.', true);
+  } finally {
+    $('salir').disabled = false;
+  }
+});
+
+$('recargar').addEventListener('click', () => loadAnimals(page));
+$('anterior').addEventListener('click', () => loadAnimals(page - 1));
+$('siguiente').addEventListener('click', () => loadAnimals(page + 1));
+
+$('alta').addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!user || saving || $('alta-campos').disabled) return;
+  const uid = user.id;
+  const form = event.currentTarget;
+  const fields = new FormData(form);
+  const record = {creado_por: uid};
+
+  for (const key of ['arete','nombre','raza','color','sexo','fecha_nacimiento','propietario','observaciones']) {
+    record[key] = fields.get(key).trim() || null;
+  }
+
+  if (!record.arete) return message('alta-estado', 'Escribe el número de arete.', true);
+
+  const photo = fields.get('foto');
+  if (photo.name && (!PHOTO_TYPES[photo.type] || !photo.size || photo.size > 5 * 1024 * 1024)) {
+    return message('alta-estado', 'Elige una imagen JPG, PNG o WebP de hasta 5 MB.', true);
+  }
+
+  saving = true;
+  $('alta-campos').disabled = true;
+  message('alta-estado', 'Guardando animal…');
+  const bucket = db.storage.from(BUCKET);
+  let phase = 'foto';
+
+  try {
+    if (photo.name) {
+      const path = uid + '/' + crypto.randomUUID() + '.' + PHOTO_TYPES[photo.type];
+      const {error} = await bucket.upload(path, photo, {cacheControl:'60', upsert:false});
+      if (error) throw error;
+      record.foto_url = path;
+    }
+
+    if (user?.id !== uid) return;
+    phase = 'registro';
+    const {error} = await db.from('animales').insert(record);
+    if (error) throw error;
+    if (user?.id !== uid) return;
+
+    form.reset();
+    message('alta-estado', 'Animal registrado.');
+    void loadAnimals(0);
+  } catch (error) {
+    if (user?.id !== uid) return;
+    if (phase === 'registro' && /^[0-9A-Z]{5}$/.test(error.code ?? '') && record.foto_url) {
+      try {
+        await bucket.remove([record.foto_url]);
+      } catch {
+        // El registro fue rechazado antes de guardar el animal.
+      }
+    }
+
+    if (user?.id !== uid) return;
+    const detail = error.code === '23505' ? 'Ya tienes un animal con ese arete.' :
+      phase === 'foto' ? 'No se pudo subir la foto. Revisa tu conexión y los permisos de Storage.' :
+      'No se confirmó el registro. Actualiza el listado antes de volver a intentarlo.';
+    message('alta-estado', detail, true);
+  } finally {
+    if (user?.id === uid) {
+      saving = false;
+      $('alta-campos').disabled = false;
+    }
+  }
+});
+
+async function start() {
+  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(SUPABASE_URL)) {
+    message('aviso', 'Falta configurar la URL del proyecto Supabase.', true);
+    return;
+  }
+
+  try {
+    const {createClient} = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/+esm');
+    db = createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{detectSessionInUrl:false}});
+    db.auth.onAuthStateChange((_event, session) => setTimeout(() => showSession(session), 0));
+    $('login-campos').disabled = false;
+  } catch {
+    message('aviso', 'No se pudo cargar la conexión con Supabase. Recarga la página.', true);
+  }
+}
+
+void start();
+</script>
+</body>
+</html>

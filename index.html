@@ -6,17 +6,27 @@
 <meta name="referrer" content="no-referrer">
 <title>Control Ganadero Pro</title>
 <style>
-:root{font:100% system-ui,sans-serif;color:#172e25;background:#edf1eb;--verde:#174c38;--borde:#cbd8ce}
+:root {
+  color-scheme:dark;
+  font:100% system-ui,sans-serif;
+  color:#f0f7eb;
+  background:#101815;
+  --panel:#1a2621;
+  --line:#3b4d43;
+  --green:#b8efcc;
+  --muted:#b4c9bc;
+  --gold:#ffd478;
+}
 *{box-sizing:border-box}
 body{margin:0}
 [hidden]{display:none!important}
-header{background:#12382b;color:white;padding:1rem max(1rem,calc((100vw - 72rem)/2));display:flex;align-items:center;justify-content:space-between;gap:1rem}
+header{position:sticky;top:0;z-index:1;background:#15221b;border-bottom:1px solid var(--line);padding:1rem max(1rem,calc((100vw - 72rem)/2));display:flex;align-items:center;justify-content:space-between;gap:1rem}
 header strong{font-size:1.15rem}
 main{max-width:74rem;margin:auto;padding:clamp(1rem,3vw,2rem)}
 h1,h2,h3,p{margin-top:0}
-h1{font-size:clamp(1.7rem,4vw,2.55rem);margin-bottom:.5rem}
+h1{font-size:clamp(2rem,6vw,3.6rem);letter-spacing:-.055em;margin-bottom:.5rem}
 h2{font-size:1.3rem}
-.panel,article,dialog{background:white;border:1px solid var(--borde);border-radius:1rem;padding:clamp(1rem,3vw,1.6rem)}
+.panel,article,dialog{background:var(--panel);border:1px solid var(--line);border-radius:1rem;padding:clamp(1rem,3vw,1.6rem)}
 .login{max-width:29rem;margin:clamp(1rem,7vh,5rem) auto}
 .layout{display:grid;grid-template-columns:minmax(18rem,1fr) minmax(0,1.55fr);gap:1rem;align-items:start}
 form,fieldset{display:grid;gap:.85rem}
@@ -24,29 +34,53 @@ fieldset{padding:0;border:0;margin:0;min-width:0}
 fieldset:disabled{opacity:.65}
 label{display:grid;gap:.3rem;font-weight:600;font-size:.95rem}
 input,select,textarea,button{font:inherit}
-input,select,textarea{width:100%;min-width:0;border:1px solid #93a99a;border-radius:.5rem;padding:.63rem;color:inherit;background:white}
+input,select,textarea{width:100%;min-width:0;border:1px solid #61776b;border-radius:.5rem;padding:.63rem;color:inherit;background:#121c17}
 textarea{resize:vertical}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
 .full{grid-column:1/-1}
-button{cursor:pointer;background:var(--verde);color:white;border:1px solid transparent;border-radius:.55rem;padding:.62rem .9rem;font-weight:650}
+button,.jump{background:var(--green);color:#14271b;border:1px solid transparent;border-radius:.65rem;padding:.65rem 1rem;font-weight:750}
+button{cursor:pointer}
 button:disabled{opacity:.55;cursor:default}
-.secondary{background:white;color:var(--verde);border-color:#93a99a}
-:focus-visible{outline:3px solid #ac5419;outline-offset:3px}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:.7rem;flex-wrap:wrap;margin-bottom:.7rem}
+.jump{text-decoration:none}
+.secondary{background:#23342b;color:inherit;border-color:#61776b}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.toolbar,.intro{display:flex;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+.toolbar{align-items:center;margin-bottom:.7rem}
 .toolbar h2{margin:0}
+.intro{align-items:end;margin-bottom:1.3rem}
+.intro p{margin:0;overflow-wrap:anywhere}
 .cards{display:grid;gap:.7rem}
 .cards article{padding:1rem;overflow-wrap:anywhere}
 .cards h3{margin:0 0 .4rem}
-.meta{color:#486254;font-size:.9rem}
+.cards article button{margin:.25rem .35rem .25rem 0}
+.meta{color:var(--muted);font-size:.9rem}
 .status{margin:0;overflow-wrap:anywhere}
 .status:empty{display:none}
-.error{color:#8e271e}
+.error{color:#ffb1a6}
 nav{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.75rem}
 dialog{width:min(92vw,50rem);max-height:90vh;color:inherit}
 dialog::backdrop{background:#0d231ecc}
 dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margin:auto}
-@media(max-width:760px){.layout{grid-template-columns:1fr}}
+.dashboard{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:.8rem;margin-bottom:1rem}
+.metric{min-width:0;display:flex;flex-direction:column;gap:.6rem}
+.metric h2,.metric p{margin:0}
+.metric h2{font-size:.95rem;color:var(--muted)}
+.metric strong{font-size:clamp(1.65rem,4vw,2.6rem);font-weight:760;line-height:1;letter-spacing:-.05em;overflow-wrap:anywhere}
+.metric-main{background:linear-gradient(135deg,#254635,#1d3127);border-color:#4b705c}
+.metric-main strong{font-size:clamp(3rem,7vw,5rem);color:#e6ffec}
+.metric-deaths strong{color:var(--gold)}
+.herd-bar{height:.48rem;border-radius:2rem;background:var(--gold);overflow:hidden}
+.herd-bar span{display:block;width:0;height:100%;background:#9bdfb5}
+#resumen-aviso{margin-bottom:1rem}
+#registro{scroll-margin-top:6rem}
+@media(max-width:760px){
+  .layout{grid-template-columns:1fr}
+  .dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metric-main{grid-column:1/-1}
+  .intro{align-items:start}
+}
 @media(max-width:370px){.fields{grid-template-columns:1fr}}
+@media(max-width:350px){.dashboard{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -71,15 +105,43 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
         </label>
         <button>Entrar</button>
       </fieldset>
-      <p id="login-estado" class="status error" role="alert"></p>
+      <p id="login-estado" class="status" role="alert"></p>
     </form>
   </section>
 
   <section id="app" hidden>
-    <h1>Mi ganado</h1>
-    <p id="cuenta" class="meta"></p>
+    <div class="intro">
+      <div>
+        <h1>Mi ganado</h1>
+        <p id="cuenta" class="meta"></p>
+      </div>
+      <a class="jump" href="#registro">Registrar animal</a>
+    </div>
+
+    <p id="resumen-aviso" class="status" role="status"></p>
+    <section id="resumen" class="dashboard" aria-label="Resumen del ganado" hidden>
+      <article class="panel metric metric-main">
+        <h2>Ganado en pie</h2>
+        <strong id="ganado-vivo"></strong>
+        <div id="barra-ganado" class="herd-bar" aria-hidden="true">
+          <span id="barra-vivos"></span>
+        </div>
+        <p id="ganado-total" class="meta"></p>
+      </article>
+      <article class="panel metric">
+        <h2>Costo de compra</h2>
+        <strong id="costo-total"></strong>
+        <p class="meta">Total registrado en MXN</p>
+      </article>
+      <article class="panel metric metric-deaths">
+        <h2>Mortalidad</h2>
+        <strong id="mortalidad"></strong>
+        <p id="ganado-fallecido" class="meta"></p>
+      </article>
+    </section>
+
     <div class="layout">
-      <section class="panel">
+      <section id="registro" class="panel">
         <h2>Registrar animal</h2>
         <form id="alta">
           <fieldset id="alta-campos" class="fields" disabled>
@@ -95,6 +157,9 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
               </select>
             </label>
             <label>Fecha de nacimiento<input name="fecha_nacimiento" type="date"></label>
+            <label class="full">Costo de compra (MXN)
+              <input name="costo_compra" type="number" min="0" max="9999999999.99" step="0.01" inputmode="decimal">
+            </label>
             <label class="full">Propietario<input name="propietario" maxlength="160"></label>
             <label class="full">Foto (JPG, PNG o WebP, hasta 5 MB)
               <input name="foto" type="file" accept="image/jpeg,image/png,image/webp">
@@ -134,6 +199,24 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
   <img id="imagen" alt="Foto del animal" hidden>
 </dialog>
 
+<dialog id="editor-animal" aria-labelledby="edicion-titulo">
+  <h2 id="edicion-titulo">Editar datos del animal</h2>
+  <form id="editar-animal">
+    <fieldset id="editar-campos">
+      <label>Costo de compra (MXN)
+        <input name="costo_compra" type="number" min="0" max="9999999999.99" step="0.01" inputmode="decimal">
+      </label>
+      <label>Fecha de fallecimiento
+        <input name="fecha_fallecimiento" type="date" aria-describedby="fecha-ayuda">
+      </label>
+      <p id="fecha-ayuda" class="meta">Deja la fecha vacía si el animal está vivo.</p>
+      <button>Guardar cambios</button>
+    </fieldset>
+    <p id="editar-estado" class="status" role="status"></p>
+    <button id="cerrar-editor" class="secondary" type="button">Cerrar</button>
+  </form>
+</dialog>
+
 <noscript>Activa JavaScript para usar Control Ganadero Pro.</noscript>
 
 <script type="module">
@@ -144,7 +227,14 @@ const PAGE_SIZE = 20;
 const PHOTO_TYPES = {'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};
 const $ = id => document.getElementById(id);
 const dateFormat = new Intl.DateTimeFormat('es-MX', {dateStyle:'medium', timeZone:'UTC'});
-let db, user, saving = false, page = 0, listRequest = 0, photoRequest = 0;
+const currency = new Intl.NumberFormat('es-MX', {style:'currency', currency:'MXN'});
+const percent = new Intl.NumberFormat('es-MX', {style:'percent', maximumFractionDigits:1});
+
+let db, user, editedAnimal;
+let saving = false;
+let page = 0;
+let listRequest = 0;
+let photoRequest = 0;
 
 function message(id, value, error = false) {
   $(id).textContent = value;
@@ -155,6 +245,10 @@ function showSession(session) {
   const next = session?.user ?? null;
   if (next?.id === user?.id) return;
   user = next;
+  $('editor-animal').close();
+  editedAnimal = null;
+  $('resumen').hidden = true;
+  message('resumen-aviso', '');
   listRequest++;
   closePhoto();
   $('lista').replaceChildren();
@@ -186,16 +280,16 @@ function animalCard(animal) {
     ['Color', animal.color],
     ['Sexo', animal.sexo],
     ['Nacimiento', animal.fecha_nacimiento && localDate(animal.fecha_nacimiento)],
+    ['Costo', animal.costo_compra == null ? 'Sin registrar' : currency.format(animal.costo_compra) + ' MXN'],
+    ['Estado', animal.fecha_fallecimiento ? 'Fallecido el ' + localDate(animal.fecha_fallecimiento) : 'Vivo'],
     ['Propietario', animal.propietario],
     ['Registrado', animal.fecha_registro && localDate(animal.fecha_registro)]
   ].filter(([, value]) => value);
 
-  if (details.length) {
-    const meta = document.createElement('p');
-    meta.className = 'meta';
-    meta.textContent = details.map(([label, value]) => label + ': ' + value).join(' · ');
-    card.append(meta);
-  }
+  const meta = document.createElement('p');
+  meta.className = 'meta';
+  meta.textContent = details.map(([label, value]) => label + ': ' + value).join(' · ');
+  card.append(meta);
 
   if (animal.observaciones) {
     const notes = document.createElement('p');
@@ -211,13 +305,85 @@ function animalCard(animal) {
     card.append(button);
   }
 
+  const edit = document.createElement('button');
+  edit.className = 'secondary';
+  edit.textContent = 'Editar costo y estado';
+  edit.addEventListener('click', () => openAnimalEditor(animal));
+  card.append(edit);
   return card;
+}
+
+function openAnimalEditor(animal) {
+  editedAnimal = animal;
+  const form = $('editar-animal');
+  form.elements.costo_compra.value = animal.costo_compra ?? '';
+  form.elements.fecha_fallecimiento.value = animal.fecha_fallecimiento ?? '';
+  $('edicion-titulo').textContent = 'Editar arete ' + animal.arete;
+  $('editar-campos').disabled = false;
+  message('editar-estado', '');
+  $('editor-animal').showModal();
+}
+
+$('cerrar-editor').addEventListener('click', () => $('editor-animal').close());
+
+$('editar-animal').addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!user || !editedAnimal || $('editar-campos').disabled) return;
+  const animal = editedAnimal;
+  const uid = user.id;
+  const fields = new FormData(event.currentTarget);
+  $('editar-campos').disabled = true;
+  message('editar-estado', 'Guardando cambios…');
+
+  try {
+    const {data, error} = await db.from('animales').update({
+      costo_compra: fields.get('costo_compra') || null,
+      fecha_fallecimiento: fields.get('fecha_fallecimiento') || null
+    }).eq('id', animal.id).eq('creado_por', uid).select('id').maybeSingle();
+
+    if (error || !data) throw error ?? new Error('Animal no disponible');
+    if (user?.id !== uid) return;
+    if (editedAnimal === animal) $('editor-animal').close();
+    void loadAnimals(page);
+  } catch {
+    if (user?.id === uid && editedAnimal === animal) {
+      message('editar-estado', 'No se pudieron guardar los cambios. Inténtalo otra vez.', true);
+    }
+  } finally {
+    if (editedAnimal === animal) $('editar-campos').disabled = false;
+  }
+});
+
+async function loadSummary(request) {
+  try {
+    const {data, error} = await db.rpc('cg_resumen_animales').single();
+    if (error) throw error;
+    if (request !== listRequest) return;
+
+    const total = Number(data.total);
+    const deaths = Number(data.fallecidos);
+    const alive = total - deaths;
+    $('ganado-vivo').textContent = alive.toLocaleString('es-MX');
+    $('ganado-total').textContent = total.toLocaleString('es-MX') +
+      (total === 1 ? ' animal registrado' : ' animales registrados');
+    $('barra-ganado').hidden = total === 0;
+    $('barra-vivos').style.width = total ? (100 * alive / total) + '%' : '0%';
+    $('costo-total').textContent = data.costo_total == null ? 'Sin datos' : currency.format(data.costo_total);
+    $('mortalidad').textContent = total ? percent.format(deaths / total) : 'Sin datos';
+    $('ganado-fallecido').textContent = deaths.toLocaleString('es-MX') +
+      (deaths === 1 ? ' animal fallecido' : ' animales fallecidos');
+    $('resumen').hidden = false;
+  } catch {
+    if (request === listRequest) message('resumen-aviso', 'No se pudo cargar el resumen.', true);
+  }
 }
 
 async function loadAnimals(target) {
   if (!user) return;
   const request = ++listRequest;
   const uid = user.id;
+  $('resumen').hidden = true;
+  message('resumen-aviso', '');
   $('anterior').disabled = $('siguiente').disabled = true;
   message('lista-estado', 'Cargando animales…');
 
@@ -230,13 +396,12 @@ async function loadAnimals(target) {
     if (!membership.data) {
       $('lista').replaceChildren();
       $('pagina').textContent = '';
-      closePhoto();
       message('lista-estado', 'Tu cuenta todavía no tiene acceso. Pide al administrador que la habilite.', true);
       return;
     }
 
     const {data, error} = await db.from('animales')
-      .select('id,arete,nombre,raza,color,sexo,fecha_nacimiento,propietario,foto_url,observaciones,fecha_registro')
+      .select('id,arete,nombre,raza,color,sexo,fecha_nacimiento,propietario,foto_url,observaciones,fecha_registro,costo_compra,fecha_fallecimiento')
       .eq('creado_por', uid)
       .order('fecha_registro', {ascending:false})
       .order('id', {ascending:false})
@@ -247,6 +412,7 @@ async function loadAnimals(target) {
     if (!data.length && target > 0) return loadAnimals(target - 1);
 
     page = target;
+    void loadSummary(request);
     $('lista').replaceChildren(...data.slice(0, PAGE_SIZE).map(animalCard));
     $('pagina').textContent = 'Página ' + (page + 1);
     $('anterior').disabled = page === 0;
@@ -348,12 +514,11 @@ $('alta').addEventListener('submit', async event => {
   const uid = user.id;
   const form = event.currentTarget;
   const fields = new FormData(form);
-  const record = {creado_por: uid};
+  const record = {creado_por:uid, costo_compra:fields.get('costo_compra') || null};
 
   for (const key of ['arete','nombre','raza','color','sexo','fecha_nacimiento','propietario','observaciones']) {
     record[key] = fields.get(key).trim() || null;
   }
-
   if (!record.arete) return message('alta-estado', 'Escribe el número de arete.', true);
 
   const photo = fields.get('foto');
@@ -386,11 +551,12 @@ $('alta').addEventListener('submit', async event => {
     void loadAnimals(0);
   } catch (error) {
     if (user?.id !== uid) return;
+
     if (phase === 'registro' && /^[0-9A-Z]{5}$/.test(error.code ?? '') && record.foto_url) {
       try {
         await bucket.remove([record.foto_url]);
       } catch {
-        // El registro fue rechazado antes de guardar el animal.
+        // El registro del animal fue rechazado.
       }
     }
 
@@ -408,11 +574,6 @@ $('alta').addEventListener('submit', async event => {
 });
 
 async function start() {
-  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(SUPABASE_URL)) {
-    message('aviso', 'Falta configurar la URL del proyecto Supabase.', true);
-    return;
-  }
-
   try {
     const {createClient} = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/+esm');
     db = createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{detectSessionInUrl:false}});

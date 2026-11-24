@@ -12,21 +12,21 @@
   color:#f0f7eb;
   background:#101815;
   --panel:#1a2621;
-  --line:#3b4d43;
-  --green:#b8efcc;
-  --muted:#b4c9bc;
-  --gold:#ffd478;
+  --borde:#3b4d43;
+  --verde:#b8efcc;
+  --suave:#b4c9bc;
+  --oro:#ffd478;
 }
 *{box-sizing:border-box}
 body{margin:0}
 [hidden]{display:none!important}
-header{position:sticky;top:0;z-index:1;background:#15221b;border-bottom:1px solid var(--line);padding:1rem max(1rem,calc((100vw - 72rem)/2));display:flex;align-items:center;justify-content:space-between;gap:1rem}
+header{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem max(1rem,calc((100vw - 72rem)/2));background:#15221b;border-bottom:1px solid var(--borde)}
 header strong{font-size:1.15rem}
 main{max-width:74rem;margin:auto;padding:clamp(1rem,3vw,2rem)}
 h1,h2,h3,p{margin-top:0}
-h1{font-size:clamp(2rem,6vw,3.6rem);letter-spacing:-.055em;margin-bottom:.5rem}
+h1{font-size:clamp(2rem,6vw,3.6rem);letter-spacing:-.045em;margin-bottom:.5rem}
 h2{font-size:1.3rem}
-.panel,article,dialog{background:var(--panel);border:1px solid var(--line);border-radius:1rem;padding:clamp(1rem,3vw,1.6rem)}
+.panel,article,dialog{background:var(--panel);border:1px solid var(--borde);border-radius:1rem;padding:clamp(1rem,3vw,1.5rem)}
 .login{max-width:29rem;margin:clamp(1rem,7vh,5rem) auto}
 .layout{display:grid;grid-template-columns:minmax(18rem,1fr) minmax(0,1.55fr);gap:1rem;align-items:start}
 form,fieldset{display:grid;gap:.85rem}
@@ -36,48 +36,46 @@ label{display:grid;gap:.3rem;font-weight:600;font-size:.95rem}
 input,select,textarea,button{font:inherit}
 input,select,textarea{width:100%;min-width:0;border:1px solid #61776b;border-radius:.5rem;padding:.63rem;color:inherit;background:#121c17}
 textarea{resize:vertical}
-.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
 .full{grid-column:1/-1}
-button,.jump{background:var(--green);color:#14271b;border:1px solid transparent;border-radius:.65rem;padding:.65rem 1rem;font-weight:750}
+button,.jump{background:var(--verde);color:#14271b;border:1px solid transparent;border-radius:.65rem;padding:.65rem 1rem;font-weight:700}
 button{cursor:pointer}
 button:disabled{opacity:.55;cursor:default}
 .jump{text-decoration:none}
 .secondary{background:#23342b;color:inherit;border-color:#61776b}
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.toolbar,.intro{display:flex;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
-.toolbar{align-items:center;margin-bottom:.7rem}
-.toolbar h2{margin:0}
-.intro{align-items:end;margin-bottom:1.3rem}
-.intro p{margin:0;overflow-wrap:anywhere}
+:focus-visible{outline:3px solid var(--oro);outline-offset:3px}
+.toolbar,.intro{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap}
+.toolbar{margin-bottom:.7rem}
+.toolbar h2,.intro p{margin:0}
+.intro{margin-bottom:1.3rem}
 .cards{display:grid;gap:.7rem}
 .cards article{padding:1rem;overflow-wrap:anywhere}
 .cards h3{margin:0 0 .4rem}
 .cards article button{margin:.25rem .35rem .25rem 0}
-.meta{color:var(--muted);font-size:.9rem}
+.meta{color:var(--suave);font-size:.9rem}
 .status{margin:0;overflow-wrap:anywhere}
 .status:empty{display:none}
 .error{color:#ffb1a6}
 nav{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.75rem}
-dialog{width:min(92vw,50rem);max-height:90vh;color:inherit}
+dialog{width:min(92vw,46rem);max-height:90vh;color:inherit}
 dialog::backdrop{background:#0d231ecc}
 dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margin:auto}
-.dashboard{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:.8rem;margin-bottom:1rem}
+.dashboard{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;gap:.8rem;margin-bottom:1rem}
 .metric{min-width:0;display:flex;flex-direction:column;gap:.6rem}
 .metric h2,.metric p{margin:0}
-.metric h2{font-size:.95rem;color:var(--muted)}
-.metric strong{font-size:clamp(1.65rem,4vw,2.6rem);font-weight:760;line-height:1;letter-spacing:-.05em;overflow-wrap:anywhere}
+.metric h2{font-size:.95rem;color:var(--suave)}
+.metric strong{font-size:clamp(1.45rem,3.7vw,2.5rem);line-height:1;overflow-wrap:anywhere}
 .metric-main{background:linear-gradient(135deg,#254635,#1d3127);border-color:#4b705c}
 .metric-main strong{font-size:clamp(3rem,7vw,5rem);color:#e6ffec}
-.metric-deaths strong{color:var(--gold)}
-.herd-bar{height:.48rem;border-radius:2rem;background:var(--gold);overflow:hidden}
+.metric-deaths strong{color:var(--oro)}
+.herd-bar{height:.48rem;border-radius:2rem;background:#45584d;overflow:hidden}
 .herd-bar span{display:block;width:0;height:100%;background:#9bdfb5}
 #resumen-aviso{margin-bottom:1rem}
 #registro{scroll-margin-top:6rem}
 @media(max-width:760px){
   .layout{grid-template-columns:1fr}
   .dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .metric-main{grid-column:1/-1}
-  .intro{align-items:start}
+  .metric-main,.metric-sales{grid-column:1/-1}
 }
 @media(max-width:370px){.fields{grid-template-columns:1fr}}
 @media(max-width:350px){.dashboard{grid-template-columns:1fr}}
@@ -86,7 +84,7 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
 <body>
 <header>
   <strong>Control Ganadero Pro</strong>
-  <button hidden id="salir" class="secondary" type="button">Cerrar sesión</button>
+  <button id="salir" type="button" class="secondary" hidden>Cerrar sesión</button>
 </header>
 
 <main>
@@ -111,29 +109,30 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
 
   <section id="app" hidden>
     <div class="intro">
-      <div>
-        <h1>Mi ganado</h1>
-        <p id="cuenta" class="meta"></p>
-      </div>
+      <div><h1>Mi ganado</h1><p id="cuenta" class="meta"></p></div>
       <a class="jump" href="#registro">Registrar animal</a>
     </div>
 
     <p id="resumen-aviso" class="status" role="status"></p>
     <section id="resumen" class="dashboard" aria-label="Resumen del ganado" hidden>
-      <article class="panel metric metric-main">
+      <article class="metric metric-main">
         <h2>Ganado en pie</h2>
         <strong id="ganado-vivo"></strong>
-        <div id="barra-ganado" class="herd-bar" aria-hidden="true">
-          <span id="barra-vivos"></span>
-        </div>
+        <div id="barra-ganado" class="herd-bar" aria-hidden="true"><span id="barra-vivos"></span></div>
         <p id="ganado-total" class="meta"></p>
       </article>
-      <article class="panel metric">
+      <article class="metric">
         <h2>Costo de compra</h2>
         <strong id="costo-total"></strong>
         <p class="meta">Total registrado en MXN</p>
       </article>
-      <article class="panel metric metric-deaths">
+      <article class="metric metric-sales">
+        <h2>Ingresos por ventas</h2>
+        <strong id="ingresos-ventas"></strong>
+        <p id="ganado-vendido" class="meta"></p>
+        <p id="costo-vendidos" class="meta"></p>
+      </article>
+      <article class="metric metric-deaths">
         <h2>Mortalidad</h2>
         <strong id="mortalidad"></strong>
         <p id="ganado-fallecido" class="meta"></p>
@@ -176,14 +175,14 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
       <section class="panel" aria-labelledby="titulo-lista">
         <div class="toolbar">
           <h2 id="titulo-lista">Animales registrados</h2>
-          <button id="recargar" class="secondary" type="button">Actualizar</button>
+          <button id="recargar" type="button" class="secondary">Actualizar</button>
         </div>
         <p id="lista-estado" class="status meta" role="status"></p>
         <div id="lista" class="cards"></div>
         <nav aria-label="Páginas del listado">
-          <button id="anterior" class="secondary" type="button" disabled>Anterior</button>
+          <button id="anterior" type="button" class="secondary" disabled>Anterior</button>
           <span id="pagina" class="meta"></span>
-          <button id="siguiente" class="secondary" type="button" disabled>Siguiente</button>
+          <button id="siguiente" type="button" class="secondary" disabled>Siguiente</button>
         </nav>
       </section>
     </div>
@@ -199,21 +198,22 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
   <img id="imagen" alt="Foto del animal" hidden>
 </dialog>
 
-<dialog id="editor-animal" aria-labelledby="edicion-titulo">
-  <h2 id="edicion-titulo">Editar datos del animal</h2>
-  <form id="editar-animal">
+<dialog id="editor" aria-labelledby="edicion-titulo">
+  <h2 id="edicion-titulo">Editar animal</h2>
+  <form id="edicion">
     <fieldset id="editar-campos">
       <label>Costo de compra (MXN)
         <input name="costo_compra" type="number" min="0" max="9999999999.99" step="0.01" inputmode="decimal">
       </label>
-      <label>Fecha de fallecimiento
-        <input name="fecha_fallecimiento" type="date" aria-describedby="fecha-ayuda">
+      <label>Fecha de venta<input name="fecha_venta" type="date"></label>
+      <label>Precio de venta (MXN)
+        <input name="precio_venta" type="number" min="0" max="9999999999.99" step="0.01" inputmode="decimal">
       </label>
-      <p id="fecha-ayuda" class="meta">Deja la fecha vacía si el animal está vivo.</p>
+      <label>Fecha de fallecimiento<input name="fecha_fallecimiento" type="date"></label>
       <button>Guardar cambios</button>
     </fieldset>
     <p id="editar-estado" class="status" role="status"></p>
-    <button id="cerrar-editor" class="secondary" type="button">Cerrar</button>
+    <button id="cerrar-editor" type="button" class="secondary">Cerrar</button>
   </form>
 </dialog>
 
@@ -226,246 +226,221 @@ const BUCKET = 'fotos-ganado';
 const PAGE_SIZE = 20;
 const PHOTO_TYPES = {'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};
 const $ = id => document.getElementById(id);
-const dateFormat = new Intl.DateTimeFormat('es-MX', {dateStyle:'medium', timeZone:'UTC'});
-const currency = new Intl.NumberFormat('es-MX', {style:'currency', currency:'MXN'});
-const percent = new Intl.NumberFormat('es-MX', {style:'percent', maximumFractionDigits:1});
+const pesos = new Intl.NumberFormat('es-MX', {style:'currency', currency:'MXN'});
+const porcentaje = new Intl.NumberFormat('es-MX', {style:'percent', maximumFractionDigits:1});
+const fecha = new Intl.DateTimeFormat('es-MX', {dateStyle:'medium', timeZone:'UTC'});
+const camposEdicion = ['costo_compra','fecha_venta','precio_venta','fecha_fallecimiento'];
 
-let db, user, editedAnimal;
-let saving = false;
-let page = 0;
-let listRequest = 0;
-let photoRequest = 0;
+let db, user, animalEditado;
+let pagina = 0;
+let versionLista = 0;
+let versionFoto = 0;
+let guardando = false;
 
-function message(id, value, error = false) {
-  $(id).textContent = value;
+function mensaje(id, texto, error = false) {
+  $(id).textContent = texto;
   $(id).classList.toggle('error', error);
 }
 
-function showSession(session) {
-  const next = session?.user ?? null;
-  if (next?.id === user?.id) return;
-  user = next;
-  $('editor-animal').close();
-  editedAnimal = null;
+function mostrarSesion(session) {
+  const siguiente = session?.user ?? null;
+  if (siguiente?.id === user?.id) return;
+  user = siguiente;
+  versionLista++;
+  cerrarFoto();
+  $('editor').close();
+  animalEditado = null;
   $('resumen').hidden = true;
-  message('resumen-aviso', '');
-  listRequest++;
-  closePhoto();
   $('lista').replaceChildren();
   $('alta').reset();
-  saving = false;
   $('alta-campos').disabled = true;
-  message('alta-estado', '');
-  message('aviso', '');
+  guardando = false;
+  mensaje('aviso', '');
+  mensaje('resumen-aviso', '');
+  mensaje('alta-estado', '');
   $('app').hidden = !user;
   $('acceso').hidden = Boolean(user);
   $('salir').hidden = !user;
   $('cuenta').textContent = user?.email ?? '';
-  if (user) void loadAnimals(0);
+  if (user) void cargarAnimales(0);
 }
 
-function localDate(value) {
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? value : dateFormat.format(date);
+function cambiarFicha(animal) {
+  animalEditado = animal;
+  const form = $('edicion');
+  for (const campo of camposEdicion) {
+    form.elements.namedItem(campo).value = animal[campo] ?? '';
+  }
+  $('edicion-titulo').textContent = 'Editar arete ' + animal.arete;
+  $('editar-campos').disabled = false;
+  mensaje('editar-estado', '');
+  $('editor').showModal();
 }
 
-function animalCard(animal) {
+function ficha(animal) {
   const card = document.createElement('article');
-  const title = document.createElement('h3');
-  title.textContent = animal.nombre ? animal.nombre + ' · ' + animal.arete : 'Arete ' + animal.arete;
-  card.append(title);
+  const titulo = document.createElement('h3');
+  titulo.textContent = animal.nombre ? animal.nombre + ' · ' + animal.arete : 'Arete ' + animal.arete;
+  card.append(titulo);
 
-  const details = [
+  let estado = 'En el hato';
+  if (animal.fecha_venta) estado = 'Vendido el ' + fecha.format(new Date(animal.fecha_venta));
+  if (animal.fecha_fallecimiento) estado = 'Fallecido el ' + fecha.format(new Date(animal.fecha_fallecimiento));
+
+  const datos = [
     ['Raza', animal.raza],
     ['Color', animal.color],
     ['Sexo', animal.sexo],
-    ['Nacimiento', animal.fecha_nacimiento && localDate(animal.fecha_nacimiento)],
-    ['Costo', animal.costo_compra == null ? 'Sin registrar' : currency.format(animal.costo_compra) + ' MXN'],
-    ['Estado', animal.fecha_fallecimiento ? 'Fallecido el ' + localDate(animal.fecha_fallecimiento) : 'Vivo'],
+    ['Nacimiento', animal.fecha_nacimiento && fecha.format(new Date(animal.fecha_nacimiento))],
     ['Propietario', animal.propietario],
-    ['Registrado', animal.fecha_registro && localDate(animal.fecha_registro)]
-  ].filter(([, value]) => value);
-
-  const meta = document.createElement('p');
-  meta.className = 'meta';
-  meta.textContent = details.map(([label, value]) => label + ': ' + value).join(' · ');
-  card.append(meta);
+    ['Registrado', animal.fecha_registro && fecha.format(new Date(animal.fecha_registro))],
+    ['Costo', animal.costo_compra == null ? 'Sin registrar' : pesos.format(animal.costo_compra)],
+    ['Estado', estado],
+    ['Venta', animal.fecha_venta && pesos.format(animal.precio_venta)]
+  ].filter(([, valor]) => valor);
+  const detalle = document.createElement('p');
+  detalle.className = 'meta';
+  detalle.textContent = datos.map(([etiqueta, valor]) => etiqueta + ': ' + valor).join(' · ');
+  card.append(detalle);
 
   if (animal.observaciones) {
-    const notes = document.createElement('p');
-    notes.textContent = animal.observaciones;
-    card.append(notes);
+    const nota = document.createElement('p');
+    nota.textContent = animal.observaciones;
+    card.append(nota);
   }
 
   if (animal.foto_url) {
-    const button = document.createElement('button');
-    button.className = 'secondary';
-    button.textContent = 'Ver foto';
-    button.addEventListener('click', () => openPhoto(animal));
-    card.append(button);
+    const foto = document.createElement('button');
+    foto.className = 'secondary';
+    foto.textContent = 'Ver foto';
+    foto.addEventListener('click', () => abrirFoto(animal));
+    card.append(foto);
   }
 
-  const edit = document.createElement('button');
-  edit.className = 'secondary';
-  edit.textContent = 'Editar costo y estado';
-  edit.addEventListener('click', () => openAnimalEditor(animal));
-  card.append(edit);
+  const editar = document.createElement('button');
+  editar.className = 'secondary';
+  editar.textContent = 'Editar costo, venta y estado';
+  editar.addEventListener('click', () => cambiarFicha(animal));
+  card.append(editar);
   return card;
 }
 
-function openAnimalEditor(animal) {
-  editedAnimal = animal;
-  const form = $('editar-animal');
-  form.elements.costo_compra.value = animal.costo_compra ?? '';
-  form.elements.fecha_fallecimiento.value = animal.fecha_fallecimiento ?? '';
-  $('edicion-titulo').textContent = 'Editar arete ' + animal.arete;
-  $('editar-campos').disabled = false;
-  message('editar-estado', '');
-  $('editor-animal').showModal();
-}
-
-$('cerrar-editor').addEventListener('click', () => $('editor-animal').close());
-
-$('editar-animal').addEventListener('submit', async event => {
-  event.preventDefault();
-  if (!user || !editedAnimal || $('editar-campos').disabled) return;
-  const animal = editedAnimal;
-  const uid = user.id;
-  const fields = new FormData(event.currentTarget);
-  $('editar-campos').disabled = true;
-  message('editar-estado', 'Guardando cambios…');
-
+async function cargarResumen(version) {
   try {
-    const {data, error} = await db.from('animales').update({
-      costo_compra: fields.get('costo_compra') || null,
-      fecha_fallecimiento: fields.get('fecha_fallecimiento') || null
-    }).eq('id', animal.id).eq('creado_por', uid).select('id').maybeSingle();
-
-    if (error || !data) throw error ?? new Error('Animal no disponible');
-    if (user?.id !== uid) return;
-    if (editedAnimal === animal) $('editor-animal').close();
-    void loadAnimals(page);
-  } catch {
-    if (user?.id === uid && editedAnimal === animal) {
-      message('editar-estado', 'No se pudieron guardar los cambios. Inténtalo otra vez.', true);
-    }
-  } finally {
-    if (editedAnimal === animal) $('editar-campos').disabled = false;
-  }
-});
-
-async function loadSummary(request) {
-  try {
-    const {data, error} = await db.rpc('cg_resumen_animales').single();
+    const {data, error} = await db.rpc('cg_resumen_con_ventas').single();
     if (error) throw error;
-    if (request !== listRequest) return;
+    if (version !== versionLista) return;
 
     const total = Number(data.total);
-    const deaths = Number(data.fallecidos);
-    const alive = total - deaths;
-    $('ganado-vivo').textContent = alive.toLocaleString('es-MX');
+    const fallecidos = Number(data.fallecidos);
+    const vendidos = Number(data.vendidos);
+    const vivos = total - fallecidos - vendidos;
+
+    $('ganado-vivo').textContent = vivos.toLocaleString('es-MX');
     $('ganado-total').textContent = total.toLocaleString('es-MX') +
       (total === 1 ? ' animal registrado' : ' animales registrados');
     $('barra-ganado').hidden = total === 0;
-    $('barra-vivos').style.width = total ? (100 * alive / total) + '%' : '0%';
-    $('costo-total').textContent = data.costo_total == null ? 'Sin datos' : currency.format(data.costo_total);
-    $('mortalidad').textContent = total ? percent.format(deaths / total) : 'Sin datos';
-    $('ganado-fallecido').textContent = deaths.toLocaleString('es-MX') +
-      (deaths === 1 ? ' animal fallecido' : ' animales fallecidos');
+    $('barra-vivos').style.width = total ? (100 * vivos / total) + '%' : '0%';
+    $('costo-total').textContent = data.costo_total == null ? 'Sin datos' : pesos.format(data.costo_total);
+    $('ingresos-ventas').textContent = pesos.format(data.ingresos_ventas ?? 0);
+    $('ganado-vendido').textContent = vendidos.toLocaleString('es-MX') +
+      (vendidos === 1 ? ' animal vendido' : ' animales vendidos');
+    $('costo-vendidos').textContent = data.costo_vendidos == null ? 'Costo de vendidos: sin datos' :
+      'Costo registrado de vendidos: ' + pesos.format(data.costo_vendidos);
+    $('mortalidad').textContent = total ? porcentaje.format(fallecidos / total) : 'Sin datos';
+    $('ganado-fallecido').textContent = fallecidos.toLocaleString('es-MX') +
+      (fallecidos === 1 ? ' animal fallecido' : ' animales fallecidos');
     $('resumen').hidden = false;
   } catch {
-    if (request === listRequest) message('resumen-aviso', 'No se pudo cargar el resumen.', true);
+    if (version === versionLista) mensaje('resumen-aviso', 'No se pudo cargar el resumen.', true);
   }
 }
 
-async function loadAnimals(target) {
+async function cargarAnimales(destino) {
   if (!user) return;
-  const request = ++listRequest;
+  const version = ++versionLista;
   const uid = user.id;
   $('resumen').hidden = true;
-  message('resumen-aviso', '');
   $('anterior').disabled = $('siguiente').disabled = true;
-  message('lista-estado', 'Cargando animales…');
+  mensaje('resumen-aviso', '');
+  mensaje('lista-estado', 'Cargando animales…');
 
   try {
-    const membership = await db.rpc('cg_es_socio');
-    if (membership.error) throw membership.error;
-    if (request !== listRequest) return;
-
-    $('alta-campos').disabled = !membership.data || saving;
-    if (!membership.data) {
+    const socio = await db.rpc('cg_es_socio');
+    if (socio.error) throw socio.error;
+    if (version !== versionLista) return;
+    $('alta-campos').disabled = !socio.data || guardando;
+    if (!socio.data) {
       $('lista').replaceChildren();
       $('pagina').textContent = '';
-      message('lista-estado', 'Tu cuenta todavía no tiene acceso. Pide al administrador que la habilite.', true);
+      mensaje('lista-estado', 'Tu cuenta todavía no tiene acceso.', true);
       return;
     }
 
     const {data, error} = await db.from('animales')
-      .select('id,arete,nombre,raza,color,sexo,fecha_nacimiento,propietario,foto_url,observaciones,fecha_registro,costo_compra,fecha_fallecimiento')
+      .select('id,arete,nombre,raza,color,sexo,fecha_nacimiento,propietario,foto_url,observaciones,fecha_registro,costo_compra,fecha_fallecimiento,fecha_venta,precio_venta')
       .eq('creado_por', uid)
       .order('fecha_registro', {ascending:false})
       .order('id', {ascending:false})
-      .range(target * PAGE_SIZE, (target + 1) * PAGE_SIZE);
+      .range(destino * PAGE_SIZE, (destino + 1) * PAGE_SIZE);
 
     if (error) throw error;
-    if (request !== listRequest) return;
-    if (!data.length && target > 0) return loadAnimals(target - 1);
+    if (version !== versionLista) return;
+    if (!data.length && destino > 0) return cargarAnimales(destino - 1);
 
-    page = target;
-    void loadSummary(request);
-    $('lista').replaceChildren(...data.slice(0, PAGE_SIZE).map(animalCard));
-    $('pagina').textContent = 'Página ' + (page + 1);
-    $('anterior').disabled = page === 0;
+    pagina = destino;
+    $('lista').replaceChildren(...data.slice(0, PAGE_SIZE).map(ficha));
+    $('pagina').textContent = 'Página ' + (pagina + 1);
+    $('anterior').disabled = pagina === 0;
     $('siguiente').disabled = data.length <= PAGE_SIZE;
-    message('lista-estado', data.length ? '' : 'Todavía no tienes animales registrados.');
+    mensaje('lista-estado', data.length ? '' : 'Todavía no tienes animales registrados.');
+    void cargarResumen(version);
   } catch {
-    if (request === listRequest) {
-      message('lista-estado', 'No se pudo cargar el listado. Pulsa Actualizar para reintentar.', true);
+    if (version === versionLista) {
+      mensaje('lista-estado', 'No se pudo cargar el listado. Pulsa Actualizar para reintentar.', true);
     }
   }
 }
 
-function closePhoto() {
-  photoRequest++;
+function cerrarFoto() {
+  versionFoto++;
   if ($('visor').open) $('visor').close();
   $('imagen').hidden = true;
   $('imagen').removeAttribute('src');
 }
 
 $('visor').addEventListener('close', () => {
-  if (!$('visor').open) closePhoto();
+  if (!$('visor').open) cerrarFoto();
 });
 
-async function openPhoto(animal) {
+async function abrirFoto(animal) {
   if (!user) return;
-  const request = ++photoRequest;
-  const img = $('imagen');
-  img.hidden = true;
-  img.removeAttribute('src');
+  const version = ++versionFoto;
+  const imagen = $('imagen');
+  imagen.hidden = true;
+  imagen.removeAttribute('src');
   $('foto-titulo').textContent = 'Foto · ' + animal.arete;
-  message('foto-estado', 'Cargando foto…');
+  mensaje('foto-estado', 'Cargando foto…');
   $('visor').showModal();
 
   try {
     if (!animal.foto_url.startsWith(user.id + '/')) throw new Error('Ruta inválida');
     const {data, error} = await db.storage.from(BUCKET).createSignedUrl(animal.foto_url, 120);
     if (error) throw error;
-    if (request !== photoRequest || !$('visor').open) return;
+    if (version !== versionFoto || !$('visor').open) return;
 
-    img.onload = () => {
-      if (request !== photoRequest) return;
-      img.hidden = false;
-      message('foto-estado', '');
+    imagen.onload = () => {
+      if (version !== versionFoto) return;
+      imagen.hidden = false;
+      mensaje('foto-estado', '');
     };
-    img.onerror = () => {
-      if (request === photoRequest) {
-        message('foto-estado', 'No se pudo mostrar la foto. Cierra y vuelve a abrir.', true);
-      }
+    imagen.onerror = () => {
+      if (version === versionFoto) mensaje('foto-estado', 'No se pudo mostrar la foto.', true);
     };
-    img.src = data.signedUrl;
+    imagen.src = data.signedUrl;
   } catch {
-    if (request === photoRequest && $('visor').open) {
-      message('foto-estado', 'No se pudo abrir la foto.', true);
+    if (version === versionFoto && $('visor').open) {
+      mensaje('foto-estado', 'No se pudo abrir la foto.', true);
     }
   }
 }
@@ -474,19 +449,19 @@ $('login').addEventListener('submit', async event => {
   event.preventDefault();
   if (!db) return;
   const form = event.currentTarget;
-  const fields = new FormData(form);
+  const campos = new FormData(form);
   $('login-campos').disabled = true;
-  message('login-estado', '');
+  mensaje('login-estado', '');
 
   try {
     const {error} = await db.auth.signInWithPassword({
-      email: fields.get('correo').trim(),
-      password: fields.get('clave')
+      email: campos.get('correo').trim(),
+      password: campos.get('clave')
     });
     if (error) throw error;
     form.reset();
   } catch {
-    message('login-estado', 'No se pudo iniciar sesión. Revisa tus datos y la conexión.', true);
+    mensaje('login-estado', 'No se pudo iniciar sesión. Revisa tus datos y la conexión.', true);
   } finally {
     $('login-campos').disabled = false;
   }
@@ -498,93 +473,131 @@ $('salir').addEventListener('click', async () => {
     const {error} = await db.auth.signOut({scope:'local'});
     if (error) throw error;
   } catch {
-    message('aviso', 'No se pudo cerrar la sesión. Vuelve a intentarlo.', true);
+    mensaje('aviso', 'No se pudo cerrar la sesión. Vuelve a intentarlo.', true);
   } finally {
     $('salir').disabled = false;
   }
 });
 
-$('recargar').addEventListener('click', () => loadAnimals(page));
-$('anterior').addEventListener('click', () => loadAnimals(page - 1));
-$('siguiente').addEventListener('click', () => loadAnimals(page + 1));
+$('recargar').addEventListener('click', () => cargarAnimales(pagina));
+$('anterior').addEventListener('click', () => cargarAnimales(pagina - 1));
+$('siguiente').addEventListener('click', () => cargarAnimales(pagina + 1));
+$('cerrar-editor').addEventListener('click', () => $('editor').close());
+
+$('edicion').addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!user || !animalEditado || $('editar-campos').disabled) return;
+
+  const animal = animalEditado;
+  const uid = user.id;
+  const campos = new FormData(event.currentTarget);
+  const cambios = Object.fromEntries(camposEdicion.map(campo => [campo, campos.get(campo) || null]));
+
+  if (Boolean(cambios.fecha_venta) !== Boolean(cambios.precio_venta)) {
+    return mensaje('editar-estado', 'Completa la fecha y el precio de venta.', true);
+  }
+  if (cambios.fecha_venta && cambios.fecha_fallecimiento) {
+    return mensaje('editar-estado', 'Para guardar la venta, deja vacía la fecha de fallecimiento.', true);
+  }
+
+  $('editar-campos').disabled = true;
+  mensaje('editar-estado', 'Guardando cambios…');
+
+  try {
+    const {data, error} = await db.from('animales').update(cambios)
+      .eq('id', animal.id).eq('creado_por', uid).select('id').maybeSingle();
+    if (error || !data) throw error ?? new Error('Animal no disponible');
+    if (user?.id !== uid) return;
+    if (animalEditado === animal) $('editor').close();
+    void cargarAnimales(pagina);
+  } catch {
+    if (user?.id === uid && animalEditado === animal) {
+      mensaje('editar-estado', 'No se pudieron guardar los cambios. Inténtalo otra vez.', true);
+    }
+  } finally {
+    if (animalEditado === animal) $('editar-campos').disabled = false;
+  }
+});
 
 $('alta').addEventListener('submit', async event => {
   event.preventDefault();
-  if (!user || saving || $('alta-campos').disabled) return;
+  if (!user || guardando || $('alta-campos').disabled) return;
+
   const uid = user.id;
   const form = event.currentTarget;
-  const fields = new FormData(form);
-  const record = {creado_por:uid, costo_compra:fields.get('costo_compra') || null};
-
-  for (const key of ['arete','nombre','raza','color','sexo','fecha_nacimiento','propietario','observaciones']) {
-    record[key] = fields.get(key).trim() || null;
+  const campos = new FormData(form);
+  const registro = {creado_por:uid, costo_compra:campos.get('costo_compra') || null};
+  for (const campo of ['arete','nombre','raza','color','sexo','fecha_nacimiento','propietario','observaciones']) {
+    registro[campo] = campos.get(campo).trim() || null;
   }
-  if (!record.arete) return message('alta-estado', 'Escribe el número de arete.', true);
+  if (!registro.arete) return mensaje('alta-estado', 'Escribe el número de arete.', true);
 
-  const photo = fields.get('foto');
-  if (photo.name && (!PHOTO_TYPES[photo.type] || !photo.size || photo.size > 5 * 1024 * 1024)) {
-    return message('alta-estado', 'Elige una imagen JPG, PNG o WebP de hasta 5 MB.', true);
+  const foto = campos.get('foto');
+  if (foto.name && (!PHOTO_TYPES[foto.type] || !foto.size || foto.size > 5 * 1024 * 1024)) {
+    return mensaje('alta-estado', 'Elige una imagen JPG, PNG o WebP de hasta 5 MB.', true);
   }
 
-  saving = true;
+  guardando = true;
   $('alta-campos').disabled = true;
-  message('alta-estado', 'Guardando animal…');
+  mensaje('alta-estado', 'Guardando animal…');
   const bucket = db.storage.from(BUCKET);
-  let phase = 'foto';
+  let fase = 'foto';
 
   try {
-    if (photo.name) {
-      const path = uid + '/' + crypto.randomUUID() + '.' + PHOTO_TYPES[photo.type];
-      const {error} = await bucket.upload(path, photo, {cacheControl:'60', upsert:false});
+    if (foto.name) {
+      const ruta = uid + '/' + crypto.randomUUID() + '.' + PHOTO_TYPES[foto.type];
+      const {error} = await bucket.upload(ruta, foto, {cacheControl:'60', upsert:false});
       if (error) throw error;
-      record.foto_url = path;
+      registro.foto_url = ruta;
     }
 
     if (user?.id !== uid) return;
-    phase = 'registro';
-    const {error} = await db.from('animales').insert(record);
+    fase = 'registro';
+    const {error} = await db.from('animales').insert(registro);
     if (error) throw error;
     if (user?.id !== uid) return;
 
     form.reset();
-    message('alta-estado', 'Animal registrado.');
-    void loadAnimals(0);
+    mensaje('alta-estado', 'Animal registrado.');
+    void cargarAnimales(0);
   } catch (error) {
     if (user?.id !== uid) return;
 
-    if (phase === 'registro' && /^[0-9A-Z]{5}$/.test(error.code ?? '') && record.foto_url) {
+    if (fase === 'registro' && /^[0-9A-Z]{5}$/.test(error.code ?? '') && registro.foto_url) {
       try {
-        await bucket.remove([record.foto_url]);
+        await bucket.remove([registro.foto_url]);
       } catch {
-        // El registro del animal fue rechazado.
+        // La foto queda disponible para revisión en Storage.
       }
     }
 
     if (user?.id !== uid) return;
-    const detail = error.code === '23505' ? 'Ya tienes un animal con ese arete.' :
-      phase === 'foto' ? 'No se pudo subir la foto. Revisa tu conexión y los permisos de Storage.' :
-      'No se confirmó el registro. Actualiza el listado antes de volver a intentarlo.';
-    message('alta-estado', detail, true);
+    let detalle = 'No se confirmó el registro. Actualiza el listado antes de volver a intentarlo.';
+    if (fase === 'foto') detalle = 'No se pudo subir la foto. Revisa la conexión y los permisos de Storage.';
+    if (error.code === '23505') detalle = 'Ya tienes un animal con ese arete.';
+    mensaje('alta-estado', detalle, true);
   } finally {
     if (user?.id === uid) {
-      saving = false;
+      guardando = false;
       $('alta-campos').disabled = false;
     }
   }
 });
 
-async function start() {
+async function iniciar() {
   try {
     const {createClient} = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/+esm');
     db = createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{detectSessionInUrl:false}});
-    db.auth.onAuthStateChange((_event, session) => setTimeout(() => showSession(session), 0));
+    db.auth.onAuthStateChange((_evento, session) => {
+      setTimeout(() => mostrarSesion(session), 0);
+    });
     $('login-campos').disabled = false;
   } catch {
-    message('aviso', 'No se pudo cargar la conexión con Supabase. Recarga la página.', true);
+    mensaje('aviso', 'No se pudo cargar la conexión con Supabase. Recarga la página.', true);
   }
 }
 
-void start();
+void iniciar();
 </script>
 </body>
 </html>

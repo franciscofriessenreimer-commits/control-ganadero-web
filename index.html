@@ -6,74 +6,62 @@
 <meta name="referrer" content="no-referrer">
 <title>Control Ganadero Pro</title>
 <style>
-:root {
-  color-scheme:dark;
-  font:100% system-ui,sans-serif;
-  color:#f0f7eb;
-  background:#101815;
-  --panel:#1a2621;
-  --borde:#3b4d43;
-  --verde:#b8efcc;
-  --suave:#b4c9bc;
-  --oro:#ffd478;
-}
+:root{color-scheme:dark;font:100% system-ui,sans-serif;background:#101815;color:#f0f7eb;--panel:#1a2621;--borde:#3b4d43;--verde:#b8efcc;--suave:#b4c9bc;--oro:#ffd478}
 *{box-sizing:border-box}
 body{margin:0}
 [hidden]{display:none!important}
 header{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem max(1rem,calc((100vw - 72rem)/2));background:#15221b;border-bottom:1px solid var(--borde)}
-header strong{font-size:1.15rem}
 main{max-width:74rem;margin:auto;padding:clamp(1rem,3vw,2rem)}
 h1,h2,h3,p{margin-top:0}
 h1{font-size:clamp(2rem,6vw,3.6rem);letter-spacing:-.045em;margin-bottom:.5rem}
-h2{font-size:1.3rem}
+h2{font-size:1.25rem}
 .panel,article,dialog{background:var(--panel);border:1px solid var(--borde);border-radius:1rem;padding:clamp(1rem,3vw,1.5rem)}
 .login{max-width:29rem;margin:clamp(1rem,7vh,5rem) auto}
 .layout{display:grid;grid-template-columns:minmax(18rem,1fr) minmax(0,1.55fr);gap:1rem;align-items:start}
-form,fieldset{display:grid;gap:.85rem}
+form,fieldset{display:grid;gap:.8rem}
 fieldset{padding:0;border:0;margin:0;min-width:0}
 fieldset:disabled{opacity:.65}
 label{display:grid;gap:.3rem;font-weight:600;font-size:.95rem}
 input,select,textarea,button{font:inherit}
-input,select,textarea{width:100%;min-width:0;border:1px solid #61776b;border-radius:.5rem;padding:.63rem;color:inherit;background:#121c17}
+input,select,textarea{width:100%;min-width:0;padding:.65rem;border:1px solid #61776b;border-radius:.5rem;background:#121c17;color:inherit}
 textarea{resize:vertical}
-.fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.fields{grid-template-columns:repeat(2,minmax(0,1fr))}
 .full{grid-column:1/-1}
-button,.jump{background:var(--verde);color:#14271b;border:1px solid transparent;border-radius:.65rem;padding:.65rem 1rem;font-weight:700}
+button,.jump{background:var(--verde);color:#14271b;padding:.65rem .9rem;border:1px solid transparent;border-radius:.65rem;font-weight:700}
 button{cursor:pointer}
 button:disabled{opacity:.55;cursor:default}
 .jump{text-decoration:none}
-.secondary{background:#23342b;color:inherit;border-color:#61776b}
+.secondary{background:#23342b;color:#f0f7eb;border-color:#61776b}
 :focus-visible{outline:3px solid var(--oro);outline-offset:3px}
-.toolbar,.intro{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap}
-.toolbar{margin-bottom:.7rem}
+.toolbar,.intro{display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.8rem}
 .toolbar h2,.intro p{margin:0}
-.intro{margin-bottom:1.3rem}
-.cards{display:grid;gap:.7rem}
-.cards article{padding:1rem;overflow-wrap:anywhere}
-.cards h3{margin:0 0 .4rem}
-.cards article button{margin:.25rem .35rem .25rem 0}
-.meta{color:var(--suave);font-size:.9rem}
-.status{margin:0;overflow-wrap:anywhere}
-.status:empty{display:none}
-.error{color:#ffb1a6}
-nav{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.75rem}
-dialog{width:min(92vw,46rem);max-height:90vh;color:inherit}
-dialog::backdrop{background:#0d231ecc}
-dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margin:auto}
+.intro p,.cards article{overflow-wrap:anywhere}
 .dashboard{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;gap:.8rem;margin-bottom:1rem}
-.metric{min-width:0;display:flex;flex-direction:column;gap:.6rem}
+.metric{min-width:0;display:grid;align-content:start;gap:.55rem}
 .metric h2,.metric p{margin:0}
-.metric h2{font-size:.95rem;color:var(--suave)}
-.metric strong{font-size:clamp(1.45rem,3.7vw,2.5rem);line-height:1;overflow-wrap:anywhere}
-.metric-main{background:linear-gradient(135deg,#254635,#1d3127);border-color:#4b705c}
-.metric-main strong{font-size:clamp(3rem,7vw,5rem);color:#e6ffec}
+.metric h2,.meta{color:var(--suave);font-size:.9rem}
+.metric strong{font-size:clamp(1.4rem,3.5vw,2.5rem);line-height:1;overflow-wrap:anywhere}
+.metric-main{background:linear-gradient(135deg,#254635,#1d3127)}
+.metric-main strong{font-size:clamp(3rem,7vw,5rem)}
 .metric-deaths strong{color:var(--oro)}
 .herd-bar{height:.48rem;border-radius:2rem;background:#45584d;overflow:hidden}
 .herd-bar span{display:block;width:0;height:100%;background:#9bdfb5}
-#resumen-aviso{margin-bottom:1rem}
+.filters{display:flex;flex-wrap:wrap;align-items:end;gap:.65rem;margin-bottom:.85rem}
+.filters label{flex:1 1 11rem}
+.cards{display:grid;gap:.7rem}
+.cards article{padding:1rem}
+.cards h3{margin:0 0 .4rem}
+.cards button{margin:.25rem .35rem .25rem 0}
+.status{margin:0 0 .6rem;overflow-wrap:anywhere}
+.status:empty{display:none}
+.error{color:#ffb1a6}
+nav{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem;margin-top:.75rem}
+dialog{width:min(92vw,46rem);max-height:90vh;color:inherit}
+dialog::backdrop{background:#0d231ecc}
+dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margin:auto}
 #registro{scroll-margin-top:6rem}
 @media(max-width:760px){
-  .layout{grid-template-columns:1fr}
+  .layout{grid-template-columns:minmax(0,1fr)}
   .dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}
   .metric-main,.metric-sales{grid-column:1/-1}
 }
@@ -84,11 +72,10 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
 <body>
 <header>
   <strong>Control Ganadero Pro</strong>
-  <button id="salir" type="button" class="secondary" hidden>Cerrar sesión</button>
+  <button id="salir" class="secondary" type="button" hidden>Cerrar sesión</button>
 </header>
-
 <main>
-  <p id="aviso" class="status error" role="alert"></p>
+  <p id="aviso" class="status" role="alert"></p>
 
   <section id="acceso" class="panel login">
     <h1>Iniciar sesión</h1>
@@ -112,7 +99,6 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
       <div><h1>Mi ganado</h1><p id="cuenta" class="meta"></p></div>
       <a class="jump" href="#registro">Registrar animal</a>
     </div>
-
     <p id="resumen-aviso" class="status" role="status"></p>
     <section id="resumen" class="dashboard" aria-label="Resumen del ganado" hidden>
       <article class="metric metric-main">
@@ -156,6 +142,7 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
               </select>
             </label>
             <label>Fecha de nacimiento<input name="fecha_nacimiento" type="date"></label>
+            <label class="full">Arete de la madre<input name="madre_arete" maxlength="80" placeholder="Opcional"></label>
             <label class="full">Costo de compra (MXN)
               <input name="costo_compra" type="number" min="0" max="9999999999.99" step="0.01" inputmode="decimal">
             </label>
@@ -163,9 +150,7 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
             <label class="full">Foto (JPG, PNG o WebP, hasta 5 MB)
               <input name="foto" type="file" accept="image/jpeg,image/png,image/webp">
             </label>
-            <label class="full">Observaciones
-              <textarea name="observaciones" rows="3" maxlength="2000"></textarea>
-            </label>
+            <label class="full">Observaciones<textarea name="observaciones" rows="3" maxlength="2000"></textarea></label>
             <button class="full">Guardar animal</button>
           </fieldset>
           <p id="alta-estado" class="status" role="status"></p>
@@ -175,14 +160,28 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
       <section class="panel" aria-labelledby="titulo-lista">
         <div class="toolbar">
           <h2 id="titulo-lista">Animales registrados</h2>
-          <button id="recargar" type="button" class="secondary">Actualizar</button>
+          <button id="recargar" class="secondary" type="button">Actualizar</button>
         </div>
+        <form id="filtros" class="filters">
+          <label>Buscar por arete o nombre<input id="buscar" type="search" maxlength="120"></label>
+          <label>Mostrar
+            <select id="modo-lista">
+              <option value="todos">Todos los animales</option>
+              <option value="sin-parto">Vacas sin parto en 12 meses</option>
+            </select>
+          </label>
+          <button>Buscar</button>
+        </form>
+        <p id="filtro-ayuda" class="meta" hidden>
+          Incluye hembras en el hato de al menos dos años o con una cría vinculada.
+          Para contar un parto, registra la fecha de nacimiento de la cría y vincúlala con su madre.
+        </p>
         <p id="lista-estado" class="status meta" role="status"></p>
         <div id="lista" class="cards"></div>
         <nav aria-label="Páginas del listado">
-          <button id="anterior" type="button" class="secondary" disabled>Anterior</button>
+          <button id="anterior" class="secondary" type="button" disabled>Anterior</button>
           <span id="pagina" class="meta"></span>
-          <button id="siguiente" type="button" class="secondary" disabled>Siguiente</button>
+          <button id="siguiente" class="secondary" type="button" disabled>Siguiente</button>
         </nav>
       </section>
     </div>
@@ -199,9 +198,11 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
 </dialog>
 
 <dialog id="editor" aria-labelledby="edicion-titulo">
-  <h2 id="edicion-titulo">Editar animal</h2>
+  <h2 id="edicion-titulo">Editar ficha</h2>
   <form id="edicion">
     <fieldset id="editar-campos">
+      <label>Fecha de nacimiento<input name="fecha_nacimiento" type="date"></label>
+      <label>Arete de la madre<input name="madre_arete" maxlength="80" placeholder="Opcional"></label>
       <label>Costo de compra (MXN)
         <input name="costo_compra" type="number" min="0" max="9999999999.99" step="0.01" inputmode="decimal">
       </label>
@@ -213,7 +214,7 @@ dialog img{display:block;max-width:100%;max-height:67vh;object-fit:contain;margi
       <button>Guardar cambios</button>
     </fieldset>
     <p id="editar-estado" class="status" role="status"></p>
-    <button id="cerrar-editor" type="button" class="secondary">Cerrar</button>
+    <button id="cerrar-editor" class="secondary" type="button">Cerrar</button>
   </form>
 </dialog>
 
@@ -228,10 +229,10 @@ const PHOTO_TYPES = {'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};
 const $ = id => document.getElementById(id);
 const pesos = new Intl.NumberFormat('es-MX', {style:'currency', currency:'MXN'});
 const porcentaje = new Intl.NumberFormat('es-MX', {style:'percent', maximumFractionDigits:1});
-const fecha = new Intl.DateTimeFormat('es-MX', {dateStyle:'medium', timeZone:'UTC'});
-const camposEdicion = ['costo_compra','fecha_venta','precio_venta','fecha_fallecimiento'];
+const fechas = new Intl.DateTimeFormat('es-MX', {dateStyle:'medium', timeZone:'UTC'});
+const camposEdicion = ['fecha_nacimiento','costo_compra','fecha_venta','precio_venta','fecha_fallecimiento'];
 
-let db, user, animalEditado;
+let db, usuario, animalEditado;
 let pagina = 0;
 let versionLista = 0;
 let versionFoto = 0;
@@ -242,10 +243,15 @@ function mensaje(id, texto, error = false) {
   $(id).classList.toggle('error', error);
 }
 
-function mostrarSesion(session) {
-  const siguiente = session?.user ?? null;
-  if (siguiente?.id === user?.id) return;
-  user = siguiente;
+function fechaLocal(valor) {
+  const fecha = new Date(valor);
+  return Number.isNaN(fecha.getTime()) ? valor : fechas.format(fecha);
+}
+
+function mostrarSesion(sesion) {
+  const siguiente = sesion?.user ?? null;
+  if (siguiente?.id === usuario?.id) return;
+  usuario = siguiente;
   versionLista++;
   cerrarFoto();
   $('editor').close();
@@ -253,22 +259,24 @@ function mostrarSesion(session) {
   $('resumen').hidden = true;
   $('lista').replaceChildren();
   $('alta').reset();
+  $('filtros').reset();
+  $('filtro-ayuda').hidden = true;
   $('alta-campos').disabled = true;
   guardando = false;
   mensaje('aviso', '');
-  mensaje('resumen-aviso', '');
   mensaje('alta-estado', '');
-  $('app').hidden = !user;
-  $('acceso').hidden = Boolean(user);
-  $('salir').hidden = !user;
-  $('cuenta').textContent = user?.email ?? '';
-  if (user) void cargarAnimales(0);
+  mensaje('resumen-aviso', '');
+  $('app').hidden = !usuario;
+  $('acceso').hidden = Boolean(usuario);
+  $('salir').hidden = !usuario;
+  $('cuenta').textContent = usuario?.email ?? '';
+  if (usuario) void cargarAnimales(0);
 }
 
-function cambiarFicha(animal) {
+function abrirEditor(animal) {
   animalEditado = animal;
   const form = $('edicion');
-  for (const campo of camposEdicion) {
+  for (const campo of [...camposEdicion, 'madre_arete']) {
     form.elements.namedItem(campo).value = animal[campo] ?? '';
   }
   $('edicion-titulo').textContent = 'Editar arete ' + animal.arete;
@@ -278,35 +286,37 @@ function cambiarFicha(animal) {
 }
 
 function ficha(animal) {
-  const card = document.createElement('article');
+  const tarjeta = document.createElement('article');
   const titulo = document.createElement('h3');
   titulo.textContent = animal.nombre ? animal.nombre + ' · ' + animal.arete : 'Arete ' + animal.arete;
-  card.append(titulo);
+  tarjeta.append(titulo);
 
   let estado = 'En el hato';
-  if (animal.fecha_venta) estado = 'Vendido el ' + fecha.format(new Date(animal.fecha_venta));
-  if (animal.fecha_fallecimiento) estado = 'Fallecido el ' + fecha.format(new Date(animal.fecha_fallecimiento));
+  if (animal.fecha_venta) estado = 'Vendido el ' + fechaLocal(animal.fecha_venta);
+  if (animal.fecha_fallecimiento) estado = 'Fallecido el ' + fechaLocal(animal.fecha_fallecimiento);
 
   const datos = [
     ['Raza', animal.raza],
     ['Color', animal.color],
     ['Sexo', animal.sexo],
-    ['Nacimiento', animal.fecha_nacimiento && fecha.format(new Date(animal.fecha_nacimiento))],
+    ['Nacimiento', animal.fecha_nacimiento && fechaLocal(animal.fecha_nacimiento)],
+    ['Madre', animal.madre_arete && [animal.madre_arete, animal.madre_nombre].filter(Boolean).join(' · ')],
     ['Propietario', animal.propietario],
-    ['Registrado', animal.fecha_registro && fecha.format(new Date(animal.fecha_registro))],
+    ['Registrado', animal.fecha_registro && fechaLocal(animal.fecha_registro)],
     ['Costo', animal.costo_compra == null ? 'Sin registrar' : pesos.format(animal.costo_compra)],
     ['Estado', estado],
     ['Venta', animal.fecha_venta && pesos.format(animal.precio_venta)]
   ].filter(([, valor]) => valor);
+
   const detalle = document.createElement('p');
   detalle.className = 'meta';
   detalle.textContent = datos.map(([etiqueta, valor]) => etiqueta + ': ' + valor).join(' · ');
-  card.append(detalle);
+  tarjeta.append(detalle);
 
   if (animal.observaciones) {
     const nota = document.createElement('p');
     nota.textContent = animal.observaciones;
-    card.append(nota);
+    tarjeta.append(nota);
   }
 
   if (animal.foto_url) {
@@ -314,15 +324,32 @@ function ficha(animal) {
     foto.className = 'secondary';
     foto.textContent = 'Ver foto';
     foto.addEventListener('click', () => abrirFoto(animal));
-    card.append(foto);
+    tarjeta.append(foto);
   }
 
   const editar = document.createElement('button');
   editar.className = 'secondary';
-  editar.textContent = 'Editar costo, venta y estado';
-  editar.addEventListener('click', () => cambiarFicha(animal));
-  card.append(editar);
-  return card;
+  editar.textContent = 'Editar ficha';
+  editar.addEventListener('click', () => abrirEditor(animal));
+  tarjeta.append(editar);
+  return tarjeta;
+}
+
+async function buscarMadre(arete, nacimiento, uid, criaId) {
+  if (!arete) return null;
+  if (!nacimiento) throw new Error('Captura la fecha de nacimiento de la cría.');
+  const {data, error} = await db.from('animales')
+    .select('id,sexo,fecha_nacimiento')
+    .eq('creado_por', uid).eq('arete', arete).maybeSingle();
+
+  if (error) throw new Error('No se pudo buscar el arete de la madre.');
+  if (!data || data.sexo?.trim().toLowerCase() !== 'hembra') {
+    throw new Error('Escribe el arete exacto de una hembra registrada.');
+  }
+  if (data.id === criaId || (data.fecha_nacimiento && data.fecha_nacimiento >= nacimiento)) {
+    throw new Error('La madre debe ser otro animal y haber nacido antes que la cría.');
+  }
+  return data.id;
 }
 
 async function cargarResumen(version) {
@@ -335,7 +362,6 @@ async function cargarResumen(version) {
     const fallecidos = Number(data.fallecidos);
     const vendidos = Number(data.vendidos);
     const vivos = total - fallecidos - vendidos;
-
     $('ganado-vivo').textContent = vivos.toLocaleString('es-MX');
     $('ganado-total').textContent = total.toLocaleString('es-MX') +
       (total === 1 ? ' animal registrado' : ' animales registrados');
@@ -357,9 +383,11 @@ async function cargarResumen(version) {
 }
 
 async function cargarAnimales(destino) {
-  if (!user) return;
+  if (!usuario) return;
   const version = ++versionLista;
-  const uid = user.id;
+  const texto = $('buscar').value.trim();
+  const soloSinParto = $('modo-lista').value === 'sin-parto';
+  $('filtro-ayuda').hidden = !soloSinParto;
   $('resumen').hidden = true;
   $('anterior').disabled = $('siguiente').disabled = true;
   mensaje('resumen-aviso', '');
@@ -370,6 +398,7 @@ async function cargarAnimales(destino) {
     if (socio.error) throw socio.error;
     if (version !== versionLista) return;
     $('alta-campos').disabled = !socio.data || guardando;
+
     if (!socio.data) {
       $('lista').replaceChildren();
       $('pagina').textContent = '';
@@ -377,10 +406,10 @@ async function cargarAnimales(destino) {
       return;
     }
 
-    const {data, error} = await db.from('animales')
-      .select('id,arete,nombre,raza,color,sexo,fecha_nacimiento,propietario,foto_url,observaciones,fecha_registro,costo_compra,fecha_fallecimiento,fecha_venta,precio_venta')
-      .eq('creado_por', uid)
-      .order('fecha_registro', {ascending:false})
+    const {data, error} = await db.rpc('cg_buscar_animales', {
+      busqueda: texto,
+      solo_sin_parto: soloSinParto
+    }).order('fecha_registro', {ascending:false})
       .order('id', {ascending:false})
       .range(destino * PAGE_SIZE, (destino + 1) * PAGE_SIZE);
 
@@ -393,7 +422,9 @@ async function cargarAnimales(destino) {
     $('pagina').textContent = 'Página ' + (pagina + 1);
     $('anterior').disabled = pagina === 0;
     $('siguiente').disabled = data.length <= PAGE_SIZE;
-    mensaje('lista-estado', data.length ? '' : 'Todavía no tienes animales registrados.');
+    const vacio = texto || soloSinParto ? 'No se encontraron animales con estos filtros.' :
+      'Todavía no tienes animales registrados.';
+    mensaje('lista-estado', data.length ? '' : vacio);
     void cargarResumen(version);
   } catch {
     if (version === versionLista) {
@@ -414,7 +445,7 @@ $('visor').addEventListener('close', () => {
 });
 
 async function abrirFoto(animal) {
-  if (!user) return;
+  if (!usuario) return;
   const version = ++versionFoto;
   const imagen = $('imagen');
   imagen.hidden = true;
@@ -424,11 +455,10 @@ async function abrirFoto(animal) {
   $('visor').showModal();
 
   try {
-    if (!animal.foto_url.startsWith(user.id + '/')) throw new Error('Ruta inválida');
+    if (!animal.foto_url.startsWith(usuario.id + '/')) throw new Error('Ruta inválida');
     const {data, error} = await db.storage.from(BUCKET).createSignedUrl(animal.foto_url, 120);
     if (error) throw error;
     if (version !== versionFoto || !$('visor').open) return;
-
     imagen.onload = () => {
       if (version !== versionFoto) return;
       imagen.hidden = false;
@@ -479,6 +509,11 @@ $('salir').addEventListener('click', async () => {
   }
 });
 
+$('filtros').addEventListener('submit', event => {
+  event.preventDefault();
+  void cargarAnimales(0);
+});
+$('modo-lista').addEventListener('change', () => cargarAnimales(0));
 $('recargar').addEventListener('click', () => cargarAnimales(pagina));
 $('anterior').addEventListener('click', () => cargarAnimales(pagina - 1));
 $('siguiente').addEventListener('click', () => cargarAnimales(pagina + 1));
@@ -486,10 +521,10 @@ $('cerrar-editor').addEventListener('click', () => $('editor').close());
 
 $('edicion').addEventListener('submit', async event => {
   event.preventDefault();
-  if (!user || !animalEditado || $('editar-campos').disabled) return;
+  if (!usuario || !animalEditado || $('editar-campos').disabled) return;
 
   const animal = animalEditado;
-  const uid = user.id;
+  const uid = usuario.id;
   const campos = new FormData(event.currentTarget);
   const cambios = Object.fromEntries(camposEdicion.map(campo => [campo, campos.get(campo) || null]));
 
@@ -504,15 +539,20 @@ $('edicion').addEventListener('submit', async event => {
   mensaje('editar-estado', 'Guardando cambios…');
 
   try {
+    cambios.madre_id = await buscarMadre(campos.get('madre_arete').trim(), cambios.fecha_nacimiento, uid, animal.id);
+    if (usuario?.id !== uid) return;
+
     const {data, error} = await db.from('animales').update(cambios)
       .eq('id', animal.id).eq('creado_por', uid).select('id').maybeSingle();
-    if (error || !data) throw error ?? new Error('Animal no disponible');
-    if (user?.id !== uid) return;
+
+    if (error?.code === '23514') throw new Error(error.message);
+    if (error || !data) throw new Error('No se pudieron guardar los cambios.');
+    if (usuario?.id !== uid) return;
     if (animalEditado === animal) $('editor').close();
     void cargarAnimales(pagina);
-  } catch {
-    if (user?.id === uid && animalEditado === animal) {
-      mensaje('editar-estado', 'No se pudieron guardar los cambios. Inténtalo otra vez.', true);
+  } catch (error) {
+    if (usuario?.id === uid && animalEditado === animal) {
+      mensaje('editar-estado', error.message || 'No se pudieron guardar los cambios.', true);
     }
   } finally {
     if (animalEditado === animal) $('editar-campos').disabled = false;
@@ -521,12 +561,13 @@ $('edicion').addEventListener('submit', async event => {
 
 $('alta').addEventListener('submit', async event => {
   event.preventDefault();
-  if (!user || guardando || $('alta-campos').disabled) return;
+  if (!usuario || guardando || $('alta-campos').disabled) return;
 
-  const uid = user.id;
+  const uid = usuario.id;
   const form = event.currentTarget;
   const campos = new FormData(form);
   const registro = {creado_por:uid, costo_compra:campos.get('costo_compra') || null};
+
   for (const campo of ['arete','nombre','raza','color','sexo','fecha_nacimiento','propietario','observaciones']) {
     registro[campo] = campos.get(campo).trim() || null;
   }
@@ -541,9 +582,14 @@ $('alta').addEventListener('submit', async event => {
   $('alta-campos').disabled = true;
   mensaje('alta-estado', 'Guardando animal…');
   const bucket = db.storage.from(BUCKET);
-  let fase = 'foto';
+  let fase = 'madre';
 
   try {
+    const madre = campos.get('madre_arete').trim();
+    if (madre) registro.madre_id = await buscarMadre(madre, registro.fecha_nacimiento, uid);
+    if (usuario?.id !== uid) return;
+
+    fase = 'foto';
     if (foto.name) {
       const ruta = uid + '/' + crypto.randomUUID() + '.' + PHOTO_TYPES[foto.type];
       const {error} = await bucket.upload(ruta, foto, {cacheControl:'60', upsert:false});
@@ -551,17 +597,17 @@ $('alta').addEventListener('submit', async event => {
       registro.foto_url = ruta;
     }
 
-    if (user?.id !== uid) return;
+    if (usuario?.id !== uid) return;
     fase = 'registro';
     const {error} = await db.from('animales').insert(registro);
     if (error) throw error;
-    if (user?.id !== uid) return;
+    if (usuario?.id !== uid) return;
 
     form.reset();
     mensaje('alta-estado', 'Animal registrado.');
     void cargarAnimales(0);
   } catch (error) {
-    if (user?.id !== uid) return;
+    if (usuario?.id !== uid) return;
 
     if (fase === 'registro' && /^[0-9A-Z]{5}$/.test(error.code ?? '') && registro.foto_url) {
       try {
@@ -571,13 +617,14 @@ $('alta').addEventListener('submit', async event => {
       }
     }
 
-    if (user?.id !== uid) return;
-    let detalle = 'No se confirmó el registro. Actualiza el listado antes de volver a intentarlo.';
-    if (fase === 'foto') detalle = 'No se pudo subir la foto. Revisa la conexión y los permisos de Storage.';
-    if (error.code === '23505') detalle = 'Ya tienes un animal con ese arete.';
-    mensaje('alta-estado', detalle, true);
+    if (usuario?.id !== uid) return;
+    let texto = 'No se confirmó el registro. Actualiza el listado antes de volver a intentarlo.';
+    if (fase === 'foto') texto = 'No se pudo subir la foto. Revisa la conexión y los permisos de Storage.';
+    if (fase === 'madre' || error.code === '23514') texto = error.message;
+    if (error.code === '23505') texto = 'Ya tienes un animal con ese arete.';
+    mensaje('alta-estado', texto, true);
   } finally {
-    if (user?.id === uid) {
+    if (usuario?.id === uid) {
       guardando = false;
       $('alta-campos').disabled = false;
     }
@@ -588,9 +635,7 @@ async function iniciar() {
   try {
     const {createClient} = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/+esm');
     db = createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{detectSessionInUrl:false}});
-    db.auth.onAuthStateChange((_evento, session) => {
-      setTimeout(() => mostrarSesion(session), 0);
-    });
+    db.auth.onAuthStateChange((_evento, sesion) => setTimeout(() => mostrarSesion(sesion), 0));
     $('login-campos').disabled = false;
   } catch {
     mensaje('aviso', 'No se pudo cargar la conexión con Supabase. Recarga la página.', true);
